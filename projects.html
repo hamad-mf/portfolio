@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects - Hamad M F</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Hamad M F</a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="skills.html">Skills</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container projects-page">
+            <h1 class="page-title">My Projects</h1>
+            <p class="page-intro">Here are some of the projects I've worked on:</p>
+
+            <section class="featured-projects-detailed">
+                <h2 class="section-subtitle" style="font-size: 1.8em; font-weight:bold; color: var(--text-color); margin-bottom: 20px;">Featured Projects</h2>
+                <div class="grid grid-cols-2"> <!-- Will become 1 col on mobile due to .projects-page .grid-cols-2 -->
+                    <div class="detailed-project-card card">
+                        <div class="header">
+                            <div class="image-placeholder"><i class="fas fa-shopping-bag"></i></div>
+                            <div class="title-desc">
+                                <h3>E-Commerce App</h3>
+                                <p>A full-featured shopping app with payment integration</p>
+                            </div>
+                        </div>
+                        <h4 class="section-heading">Key Features:</h4>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> User authentication</li>
+                            <li><i class="fas fa-check-circle"></i> Product browsing</li>
+                            <li><i class="fas fa-check-circle"></i> Shopping cart</li>
+                            <li><i class="fas fa-check-circle"></i> Secure payments</li>
+                        </ul>
+                        <div class="technologies">
+                            <h4 class="section-heading">Technologies:</h4>
+                            <span class="tech-chip">Flutter</span>
+                            <span class="tech-chip">Firebase</span>
+                            <span class="tech-chip">Provider</span>
+                            <span class="tech-chip">Stripe</span>
+                        </div>
+                        <div class="actions" style="text-align:right; margin-top: 15px;">
+                            <a href="#" class="btn-text-icon"><i class="fas fa-eye"></i> View Details</a>
+                        </div>
+                    </div>
+
+                    <div class="detailed-project-card card">
+                        <div class="header">
+                            <div class="image-placeholder"><i class="fas fa-tasks"></i></div>
+                            <div class="title-desc">
+                                <h3>Task Manager</h3>
+                                <p>A productivity app for managing daily tasks</p>
+                            </div>
+                        </div>
+                        <h4 class="section-heading">Key Features:</h4>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> Task organization</li>
+                            <li><i class="fas fa-check-circle"></i> Due dates and reminders</li>
+                            <li><i class="fas fa-check-circle"></i> Progress tracking</li>
+                            <li><i class="fas fa-check-circle"></i> Theme support</li>
+                        </ul>
+                        <div class="technologies">
+                            <h4 class="section-heading">Technologies:</h4>
+                            <span class="tech-chip">Flutter</span>
+                            <span class="tech-chip">SQLite</span>
+                            <span class="tech-chip">Bloc</span>
+                        </div>
+                        <div class="actions" style="text-align:right; margin-top: 15px;">
+                            <a href="#" class="btn-text-icon"><i class="fas fa-eye"></i> View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="client-projects mt-4">
+                <h2 class="section-subtitle" style="font-size: 1.8em; font-weight:bold; color: var(--text-color); margin-bottom: 20px;">Client Projects</h2>
+                <div class="card client-project-card">
+                    <div class="icon-placeholder"><i class="fas fa-briefcase"></i></div>
+                    <div>
+                        <h4>Health & Fitness App</h4>
+                        <p class="meta"><span>FitLife Inc.</span><span>2024</span></p>
+                        <p class="description">Developed a comprehensive fitness application.</p>
+                    </div>
+                </div>
+                <div class="card client-project-card mt-2">
+                     <div class="icon-placeholder"><i class="fas fa-utensils"></i></div>
+                    <div>
+                        <h4>Restaurant Ordering System</h4>
+                        <p class="meta"><span>Foodie Chain</span><span>2023</span></p>
+                        <p class="description">Built a multi-restaurant food ordering system.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <h2>Interested in working together?</h2>
+                <p>I'm currently taking on new projects.</p>
+                <a href="contact.html" class="btn btn-primary">Contact Me</a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Hamad M F</p>
+            <div class="social-icons">
+                <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
