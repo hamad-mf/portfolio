@@ -473,6 +473,11 @@ section { padding: 100px 40px; position: relative; }
 .project-actions .btn { font-size: 0.72rem; padding: 10px 22px; }
 
 /* ── MODAL ── */
+/* Make sure hover overlay never blocks project buttons */
+.project-card::before { pointer-events: none; }
+.project-card > * { position: relative; z-index: 1; }
+.project-actions, .project-actions .btn { position: relative; z-index: 2; }
+
 .modal-overlay {
   display: none; position: fixed; inset: 0; z-index: 500;
   background: rgba(0,0,0,0.96);
@@ -708,13 +713,13 @@ footer p { font-size: 0.72rem; color: var(--white3); letter-spacing: 0.08em; }
 <div id="loader">
   <div class="loader-text">
     <span>H</span><span>a</span><span>m</span><span>a</span><span>d</span>
-    <span class="accent">.</span>
+    <span class="accent"></span>
   </div>
 </div>
 
 <!-- HEADER -->
 <header id="header">
-  <a href="#home" class="logo">Hamad<span>.</span></a>
+  <a href="#home" class="logo">Hamad<span></span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle nav"><i class="fas fa-bars"></i></button>
   <nav>
     <ul id="navMenu">
@@ -948,7 +953,7 @@ footer p { font-size: 0.72rem; color: var(--white3); letter-spacing: 0.08em; }
         <span class="tech-tag">Razorpay</span>
       </div>
       <div class="project-actions">
-        <button onclick="openModal('workwista')" class="btn btn-primary">View Details</button>
+        <button type="button" class="btn btn-primary js-view-details" data-project="workwista">View Details</button>
         <a href="https://play.google.com/store/apps/details?id=com.app.workwistaservice" class="btn btn-ghost" target="_blank">Play Store</a>
       </div>
     </div>
@@ -964,7 +969,7 @@ footer p { font-size: 0.72rem; color: var(--white3); letter-spacing: 0.08em; }
         <span class="tech-tag">Real-time</span>
       </div>
       <div class="project-actions">
-        <button onclick="openModal('spicesspace')" class="btn btn-primary">View Details</button>
+        <button type="button" class="btn btn-primary js-view-details" data-project="spicesspace">View Details</button>
       </div>
     </div>
 
@@ -1054,14 +1059,23 @@ footer p { font-size: 0.72rem; color: var(--white3); letter-spacing: 0.08em; }
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
 // ── EMAILJS ──
-(function(){ emailjs.init("GicR5kBpR-_1NlDOw"); })();
+// Keep project modals working even if the EmailJS CDN is blocked or fails to load.
+if (window.emailjs) {
+  emailjs.init("GicR5kBpR-_1NlDOw");
+}
+
 function handleSubmit(e){
   e.preventDefault();
+
+  if (!window.emailjs) {
+    alert("❌ Email service is not loaded. Please try again later.");
+    return;
+  }
+
   emailjs.sendForm("service_k0cjccj","template_dl8togx",e.target)
     .then(()=>{ alert("✅ Message sent!"); e.target.reset(); })
     .catch(err=>{ console.error(err); alert("❌ Failed. Try again."); });
 }
-
 // ── LOADER ──
 window.addEventListener('load',()=>{
   setTimeout(()=>{
@@ -1159,9 +1173,9 @@ const projects = {
     category:'Live Auction', date:'2025',
     desc:'Developed Spices Space — an online cardamom bidding platform using Flutter with backend integration. The system supports multiple user roles including sellers and buyers, enabling real-time auctions. Sellers can list products for bidding while buyers place bids and track auction progress. Core features include user authentication, auction management, and role-based access. Focused on building a smooth and interactive experience for live bidding.',
     images:[
-      'https://i.ibb.co/35kjsbnb/demo-not-available.jpg',
-      'https://i.ibb.co/35kjsbnb/demo-not-available.jpg',
-      'https://i.ibb.co/35kjsbnb/demo-not-available.jpg'
+      'https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/29/06/9a/29069a7d-e852-2d64-396c-e4bc99b49d2e/Untitled_design.png/460x996bb.webp',
+      'https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/6e/7d/e2/6e7de2a7-8320-1503-56ab-f3162e00230f/Untitled_design__U00281_U0029.png/460x996bb.webp',
+      'https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/3e/46/ca/3e46ca8e-d76a-3b60-1151-2146b6a425e3/Untitled_design__U00283_U0029.png/460x996bb.webp'
     ],
     features:[
       {icon:'fa-gavel',text:'Real-time live auction and bidding engine'},
@@ -1234,12 +1248,25 @@ function openModal(id){
   document.body.style.overflow='hidden';
 }
 function closeModal(){
-  document.getElementById('projectModal').classList.remove('active');
+  const modal = document.getElementById('projectModal');
+  if (modal) modal.classList.remove('active');
   document.body.style.overflow='auto';
 }
-document.getElementById('projectModal').addEventListener('click',e=>{
-  if(e.target.id==='projectModal') closeModal();
+
+// Keep this working for normal buttons and any inline onclick buttons.
+window.openModal = openModal;
+window.closeModal = closeModal;
+
+document.querySelectorAll('.js-view-details').forEach(button => {
+  button.addEventListener('click', () => openModal(button.dataset.project));
 });
+
+const projectModal = document.getElementById('projectModal');
+if (projectModal) {
+  projectModal.addEventListener('click', e => {
+    if (e.target.id === 'projectModal') closeModal();
+  });
+}
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 </script>
 </body>
